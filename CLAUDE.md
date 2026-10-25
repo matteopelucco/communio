@@ -6,9 +6,13 @@ mandato, poi le specifiche approvate in [specs/](specs/README.md), poi questo fi
 
 ## Stato attuale
 
-- Fase: **bootstrap completato, in attesa di approvazione delle specifiche MVP** (gate del mandato §4).
-- Non esiste ancora codice applicativo né `package.json`: li introduce l'issue #2.
-- Questioni aperte per il product owner: [specs/product/open-questions.md](specs/product/open-questions.md).
+- Fase: **bootstrap approvato e mergiato (PR #18, 2026-10-25)**; scope MVP `Approved`.
+- Decise OQ-01…OQ-05: organizzazione = unità pastorale; politica di pubblicazione `restricted`/`open`
+  scelta dal titolare; username e password, nessuna registrazione libera, form di richiesta di accesso;
+  intenzioni e recapiti pubblicati come nel cartaceo (responsabilità dell'ente); testi completi dei canti ammessi.
+- Non esiste ancora codice applicativo né `package.json`: li introduce l'issue #2. Non avviare lo
+  sviluppo senza indicazione esplicita del product owner.
+- Questioni aperte (OQ-06…OQ-10, OQ-13…OQ-16): [specs/product/open-questions.md](specs/product/open-questions.md).
 
 ## Regole non negoziabili
 

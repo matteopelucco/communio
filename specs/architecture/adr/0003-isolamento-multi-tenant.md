@@ -2,7 +2,7 @@
 
 - **Stato:** Proposed
 - **Data:** 2026-10-25
-- **Dipende da:** [OQ-01](../../product/open-questions.md#oq-01)
+- **Dipende da:** [OQ-01](../../product/open-questions.md#oq-01), decisa il 2026-10-25: organizzazione = unità pastorale, coerente con questo ADR
 - **Spec:** F-001
 
 ## Contesto e problema

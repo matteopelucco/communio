@@ -9,7 +9,7 @@
 | Asset | Perché conta |
 | --- | --- |
 | Bozze e contenuti interni delle edizioni | Non devono essere pubblici prima della pubblicazione. |
-| Dati personali (utenti, intenzioni, recapiti) | GDPR; reputazione delle parrocchie. |
+| Dati personali degli utenti e dei richiedenti di accesso | GDPR; reputazione delle parrocchie. Intenzioni e recapiti **pubblicati** sono scelta e responsabilità dell'ente ([OQ-04](../product/open-questions.md#oq-04)), ma finché restano in bozza sono dati interni da proteggere. |
 | Isolamento tra organizzazioni | Il rischio più grave: dati di una parrocchia visibili/modificabili da un'altra. |
 | Integrità delle pubblicazioni | Un bollettino pubblicato non deve cambiare né essere falsificato. |
 | Credenziali e segreti (Supabase service role, Resend, AI) | Compromissione totale. |
@@ -28,14 +28,16 @@
 
 | Superficie | Minacce principali | Controlli previsti | Verifica |
 | --- | --- | --- | --- |
-| Auth e sessione | furto sessione, CSRF, enumerazione account, brute force | Supabase Auth con cookie `HttpOnly`/`Secure`/`SameSite=Lax` via `@supabase/ssr`; Server Actions con protezione origin di Next; messaggi d'errore non enumerativi; rate limit Supabase | E2E login/logout; test risposta uniforme |
+| Auth e sessione | furto sessione, CSRF, enumerazione account, brute force, credential stuffing | Username e password ([OQ-03](../product/open-questions.md#oq-03)) con Supabase Auth; cookie `HttpOnly`/`Secure`/`SameSite=Lax` via `@supabase/ssr`; Server Actions con protezione origin di Next; policy password; limitazione dei tentativi; messaggi d'errore non enumerativi; recupero password con link monouso | E2E login/logout; test risposta uniforme; test rate limit |
+| Richiesta di accesso (form pubblico) | spam e bot, abuso delle email di notifica, enumerazione degli account o delle organizzazioni, raccolta eccessiva di dati, approvazione da parte di chi non ne ha titolo | Endpoint server con validazione e rate limit per IP e per email; anti-bot senza servizi esterni (es. honeypot; un captcha di terzi richiede approvazione); risposta identica qualunque sia l'esito; dati minimi; tabella non leggibile da `anon`; approvazione riservata ai ruoli definiti in F-002 ([OQ-15](../product/open-questions.md#oq-15)) e registrata in audit | Integrazione + E2E; test negativi sull'approvazione |
+| Politica di pubblicazione | escalation (pubblicare con `restricted` senza ruolo), cambio non autorizzato della politica | Verifica di ruolo e `publishing_policy` nella funzione di pubblicazione (SQL/server); solo l'`owner` modifica la politica; cambio registrato in audit ([OQ-02](../product/open-questions.md#oq-02)) | pgTAP + integrazione per entrambe le politiche |
 | Autorizzazione dati | IDOR/BOLA, leakage tra tenant | RLS su **tutte** le tabelle esposte; FK composite tenant; funzioni helper `is_member(org)`/`has_role(org, roles)` `STABLE SECURITY DEFINER` con `search_path` vuoto | pgTAP positivi e **negativi** per ogni policy (select/insert/update/delete) |
 | Privilegi SQL | grant eccessivi ad `anon`/`authenticated` | Revoca dei default, grant espliciti minimi; `anon` legge solo le viste pubbliche | pgTAP su `has_table_privilege` |
 | RPC `SECURITY DEFINER` | bypass RLS, search_path hijacking | `set search_path = ''`, nomi qualificati, verifica `auth.uid()` e membership all'inizio, `revoke execute from public` | Test negativi per ogni RPC |
 | Lock ed editing | race condition, write dopo expiry, bypass API | Acquisizione atomica (`insert … on conflict … where expires_at < now()`), verifica sessione+lock+versione in ogni mutazione | Test concorrenti ripetibili (integrazione) + E2E con due browser |
 | Realtime | eventi privati a non autorizzati | Canali privati con autorizzazione Realtime/RLS; payload minimi (id e display name) | Test sottoscrizione cross-tenant negativa |
 | Storage | accesso a file privati, upload malevoli | Bucket privati, path con `organization_id`, policy su `storage.objects`, verifica MIME da contenuto, limiti di dimensione, nessun SVG non sanificato | Integrazione + review |
-| Pubblicazione pubblica | bozze esposte, enumerazione | Rotte pubbliche leggono solo `publications` pubblicate; nessuna lettura di bozze "nascoste" lato client; `noindex` secondo OQ-04 | E2E anonimo; test che una bozza dà 404 |
+| Pubblicazione pubblica | bozze esposte, enumerazione | Rotte pubbliche leggono solo `publications` pubblicate; nessuna lettura di bozze "nascoste" lato client; indicizzazione secondo [OQ-06](../product/open-questions.md#oq-06) | E2E anonimo; test che una bozza dà 404 |
 | Rendering HTML/PDF | XSS, SSRF da Chromium, DoS | Contenuto strutturato renderizzato da React (escaping); rich text con modello AST limitato, niente `dangerouslySetInnerHTML` su input utente; Chromium senza accesso a URL arbitrari (solo asset locali/consentiti); rate limit e timeout | Test XSS; spike #14 |
 | Email e inviti | spam, phishing, token leakage | Token casuale ≥ 128 bit, salvato come hash, monouso, scadenza; nessun token nei log; destinatari limitati in local/test; rate limit per organizzazione | Unit + integrazione con provider `local` |
 | Segreti | commit, bundle client, log | `.env.local` ignorato; solo `NEXT_PUBLIC_*` non segreti al client; `server-only` per moduli con segreti; secret scanning | Check CI (#5), review |

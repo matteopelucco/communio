@@ -23,6 +23,7 @@ elencano nella sezione "Collegamenti" di ciascuna specifica di feature; qui il l
 | MVP-11 Duplicazione edizione | F-008 | #13 | — | — | Refinement |
 | MVP-12 Audit | F-004 | #9 | — | — | Refinement |
 | MVP-13 Email applicative | F-003 | #8 | — | — | Refinement |
+| MVP-14 Richiesta di accesso, nessuna registrazione libera | F-002 | #7 | — | — | Refinement |
 
 ## Requisiti non funzionali e infrastruttura
 
@@ -32,7 +33,7 @@ elencano nella sezione "Collegamenti" di ciascuna specifica di feature; qui il l
 | NFR-03 Local-first | CI senza segreti hosted | #2, #3, #4 | Refinement |
 | NFR-05 Accessibilità | axe negli E2E | #4 | Refinement |
 | NFR-08 Header/CSP | test header | #5 | Refinement |
-| Bootstrap progettuale | — (documentale) | #1 | In Review |
+| Bootstrap progettuale | — (documentale) | #1, PR #18 | Done (mergiata 2026-10-25) |
 
 ## Legenda stati
 
