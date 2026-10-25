@@ -147,3 +147,28 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# --- Communio ---
+# Artefatti di test e report (mai versionati)
+artifacts/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# Supabase CLI: stato locale
+supabase/.branches/
+supabase/.temp/
+
+# Vercel
+.vercel/
+
+# Claude Code: impostazioni personali
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Materiale di riferimento con dati personali reali: MAI versionare (repository pubblico).
+# Conservare i campioni in docs/reference-private/ (ignorata).
+docs/reference-private/
+docs/*.pdf
+docs/*.docx
