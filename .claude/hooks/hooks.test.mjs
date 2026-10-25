@@ -68,6 +68,13 @@ describe('evaluateCommand', () => {
     });
   }
 
+  it('evaluates each segment of a compound command on its own', () => {
+    const chained = 'git push -u origin chore/1-x 2>&1 | tail -3 && gh pr create --base main --head chore/1-x';
+    assert.equal(evaluateCommand(chained, { branch: 'chore/1-x' }), null);
+    assert.equal(evaluateCommand('npm test && git push origin main', { branch: 'chore/1-x' })?.decision, 'deny');
+    assert.equal(evaluateCommand('git status; gh pr merge 3', { branch: 'chore/1-x' })?.decision, 'deny');
+  });
+
   it('denies commits and bare pushes on main', () => {
     assert.equal(evaluateCommand('git commit -m "x"', { branch: 'main' })?.decision, 'deny');
     assert.equal(evaluateCommand('git push', { branch: 'main' })?.decision, 'deny');

@@ -35,22 +35,49 @@ export const COMMAND_RULES = [
 ];
 
 /**
- * Evaluates a shell command. Returns null when the command may proceed through the
- * normal permission flow.
+ * Splits a shell command line into its simple commands, so that a rule never matches
+ * across `&&`, `||`, `;`, `|` or newlines (e.g. `git push … && gh pr create --base main`).
+ * @param {string} command
+ */
+export function splitSegments(command) {
+  return command
+    .split(/&&|\|\||[;|\n]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Evaluates a shell command line. Returns the strictest decision among its segments
+ * ('deny' over 'ask'), or null when it may proceed through the normal permission flow.
  * @param {string} command
  * @param {{ branch?: string | null }} [context]
  * @returns {Decision | null}
  */
 export function evaluateCommand(command, context = {}) {
+  let result = null;
+  for (const segment of splitSegments(command)) {
+    const decision = evaluateSegment(segment, context);
+    if (decision?.decision === 'deny') return decision;
+    result ??= decision;
+  }
+  return result;
+}
+
+/**
+ * @param {string} segment a single simple command
+ * @param {{ branch?: string | null }} context
+ * @returns {Decision | null}
+ */
+function evaluateSegment(segment, context) {
   for (const rule of COMMAND_RULES) {
-    if (rule.pattern.test(command)) return { decision: rule.decision, reason: rule.reason };
+    if (rule.pattern.test(segment)) return { decision: rule.decision, reason: rule.reason };
   }
   const onMain = context.branch === 'main' || context.branch === 'master';
-  if (onMain && /\bgit\s+commit\b/i.test(command)) {
+  if (onMain && /\bgit\s+commit\b/i.test(segment)) {
     return { decision: 'deny', reason: 'Commit su main non consentito: creare un branch tipo/<issue>-slug.' };
   }
   // A push without an explicit refspec from main would update main.
-  if (onMain && /\bgit\s+push(\s+(-u|--set-upstream|origin))*\s*($|[;&|])/i.test(command)) {
+  if (onMain && /\bgit\s+push(\s+(-u|--set-upstream|origin))*\s*$/i.test(segment)) {
     return { decision: 'deny', reason: 'Push da main non consentito: usare un branch e una PR.' };
   }
   return null;
