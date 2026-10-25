@@ -1,0 +1,18 @@
+// Configurazione del lint Markdown.
+// Esecuzione (finché non esiste package.json): npx --yes markdownlint-cli2@0.24.0
+{
+  "config": {
+    "default": true,
+    // Tabelle e URL lunghi sono frequenti nelle specifiche.
+    "MD013": false,
+    // HTML inline ammesso solo per <details>/<summary> nei template.
+    "MD033": { "allowed_elements": ["details", "summary", "br"] },
+    // I template GitHub iniziano con frontmatter, non con un titolo H1.
+    "MD041": false,
+    // Stile di elenco coerente ma non imposto sul tipo di marcatore annidato.
+    "MD004": { "style": "dash" },
+    "MD024": { "siblings_only": true }
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "artifacts/**", "docs/reference-private/**", "docs/communio-master-prompt.md"]
+}
