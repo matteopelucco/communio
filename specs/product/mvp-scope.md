@@ -13,20 +13,20 @@ dell'implementazione. La mappatura completa è in [traceability.md](../quality/t
 
 | ID | Requisito | Feature | Note |
 | --- | --- | --- | --- |
-| MVP-01 | Autenticazione e sessione utente con username e password. | F-002 | Decisa [OQ-03](open-questions.md#oq-03); identificativo: [OQ-14](open-questions.md#oq-14). |
+| MVP-01 | Autenticazione e sessione utente con email (come username) e password. | F-002 | Decise [OQ-03](open-questions.md#oq-03) e [OQ-14](open-questions.md#oq-14). |
 | MVP-02 | Organizzazioni tenant (= unità pastorale), parrocchie (e luoghi di culto), utenti e ruoli. | F-001, F-002 | Decise [OQ-01](open-questions.md#oq-01) e [OQ-02](open-questions.md#oq-02). |
-| MVP-03 | Dashboard delle edizioni e ciclo bozza → revisione → pubblicazione → archiviazione, con politica di pubblicazione dell'organizzazione (`restricted` o `open`) scelta dal titolare. | F-005 | Decisa [OQ-02](open-questions.md#oq-02); revisione obbligatoria: [OQ-13](open-questions.md#oq-13). |
+| MVP-03 | Dashboard delle edizioni e ciclo bozza → revisione → pubblicazione → archiviazione, con politica di pubblicazione dell'organizzazione (`restricted` o `open`) scelta dal titolare. | F-005 | Decise [OQ-02](open-questions.md#oq-02) e [OQ-13](open-questions.md#oq-13) (revisione facoltativa). |
 | MVP-04 | Editor modulare con sezioni strutturate, ordinate e validate. | F-006 | Tipi di sezione iniziali derivati dal [campione](reference-bulletin-analysis.md). |
 | MVP-05 | Modifica esclusiva per edizione con lock legato alla sessione di browser; gli altri leggono in sola lettura e vedono chi modifica. | F-007 | Parametri: heartbeat 30 s, scadenza 90 s (proposta, [ADR-0004](../architecture/adr/0004-lock-di-modifica-esclusivo.md)). |
 | MVP-06 | Autosalvataggio affidabile, stato esplicito di salvataggio/errore, protezione da scritture obsolete. | F-007 | Optimistic concurrency con numero di versione. |
 | MVP-07 | Anteprima del documento durante la modifica. | F-009 | Stesso renderer della pubblicazione. |
 | MVP-08 | Un template iniziale, ispirato al bollettino di riferimento ma più leggibile. | F-009 | |
-| MVP-09 | Pubblicazione versionata in HTML, PDF scaricabile e archivio pubblico. | F-010 | Fattibilità PDF su Vercel: spike #14. |
-| MVP-10 | Catalogo canti e repertori: catalogo condiviso e selezioni locali, con testi completi. | F-011 | Decisa [OQ-05](open-questions.md#oq-05); curatela e licenze: [OQ-16](open-questions.md#oq-16). |
+| MVP-09 | Pubblicazione versionata in HTML, PDF scaricabile e archivio pubblico visibile a tutti. | F-010 | Decisa [OQ-06](open-questions.md#oq-06) ("per ora"). Fattibilità PDF su Vercel: spike #14. |
+| MVP-10 | Catalogo canti e repertori: catalogo condiviso e selezioni locali, con testi completi. | F-011 | Decise [OQ-05](open-questions.md#oq-05) e [OQ-16](open-questions.md#oq-16) (catalogo condiviso curato dal gestore del servizio). |
 | MVP-11 | Duplicazione/riuso di un'edizione storica senza modificare l'originale. | F-008 | |
 | MVP-12 | Audit degli eventi essenziali. | F-004 | |
 | MVP-13 | Email applicative (es. inviti) dietro adapter: `local` in sviluppo/test, Resend in hosted. | F-003 | Derivato da mandato §11. |
-| MVP-14 | Nessuna registrazione libera: form pubblico di richiesta di accesso, valutata prima della creazione dell'account. | F-002 | Decisa [OQ-03](open-questions.md#oq-03); gestione: [OQ-15](open-questions.md#oq-15). |
+| MVP-14 | Nessuna registrazione libera: form pubblico di richiesta di accesso, approvata dal gestore del servizio prima della creazione dell'account. | F-002 | Decise [OQ-03](open-questions.md#oq-03) e [OQ-15](open-questions.md#oq-15) ("per ora"). |
 
 ## Requisiti non funzionali trasversali
 

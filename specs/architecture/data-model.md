@@ -25,9 +25,9 @@ versionata; questo documento si aggiorna nella stessa PR.
 | `organizations` | tenant (radice) | Tenant = unità pastorale o parrocchia singola: nome, slug, stato (`active`, `suspended`), `publishing_policy` (`restricted` \| `open`), impostazioni. | Decise [OQ-01](../product/open-questions.md#oq-01) e [OQ-02](../product/open-questions.md#oq-02); default della politica da confermare in F-002. |
 | `parishes` | tenant | Parrocchia: nome, slug, timezone, `rite`, impostazioni. | |
 | `places` | tenant | Luogo di culto: nome breve, parrocchia, indirizzo opzionale. | **Aggiunta** rispetto al mandato: il campione distingue chiese diverse nella stessa parrocchia. |
-| `profiles` | globale | Nome visualizzato; 1:1 con `auth.users`. Eventuale `username` univoco. | Visibile solo a membri delle stesse organizzazioni (dato minimo). Username: [OQ-14](../product/open-questions.md#oq-14). |
+| `profiles` | globale | Nome visualizzato; 1:1 con `auth.users`. Nessun `username` separato: l'identificativo di accesso è l'email di Supabase Auth ([OQ-14](../product/open-questions.md#oq-14)). | Visibile solo a membri delle stesse organizzazioni (dato minimo). |
 | `memberships` | tenant | Utente ↔ organizzazione, `role` (`owner`, `admin`, `editor`, `viewer`). Unica per coppia. | Permesso di pubblicazione derivato da `role` + `publishing_policy` ([OQ-02](../product/open-questions.md#oq-02)). |
-| `access_requests` | tenant o servizio | Richiesta dal form pubblico: dati minimi del richiedente, organizzazione indicata (o nuova), ruolo richiesto, messaggio, stato (`pending`, `approved`, `rejected`), chi ha deciso e quando. | **Aggiunta** per [OQ-03](../product/open-questions.md#oq-03). Insert solo tramite endpoint server con rate limit; mai leggibile da `anon`. Dettagli in F-002 ([OQ-15](../product/open-questions.md#oq-15)). |
+| `access_requests` | servizio | Richiesta dal form pubblico: dati minimi del richiedente, organizzazione indicata (o nuova), ruolo richiesto, messaggio, stato (`pending`, `approved`, `rejected`), chi ha deciso e quando. | **Aggiunta** per [OQ-03](../product/open-questions.md#oq-03). Insert solo tramite endpoint server con rate limit; mai leggibile da `anon`; lettura e decisione riservate al `service_admin` ([OQ-15](../product/open-questions.md#oq-15)). |
 | `parish_memberships` | tenant | Permessi per parrocchia. | **Rinviata**: solo se OQ-02 lo richiede. |
 | `invitations` | tenant | Invito: email, ruolo, `token_hash`, scadenza, stato, `accepted_by`. | Token in chiaro solo nell'email; mai nei log. |
 | `editions` | tenant | Numero, anno, titolo, `period_start/end`, `status`, `version`, autore. | Più parrocchie via `edition_parishes` (se necessario) o tutte quelle dell'organizzazione. |
@@ -39,7 +39,7 @@ versionata; questo documento si aggiorna nella stessa PR.
 | `publications` | tenant, lettura pubblica | Snapshot immutabile: `content jsonb`, `template_version_id`, slug, `published_at`, riferimenti a HTML/PDF, `superseded_by`. | Nessun `UPDATE` del contenuto dopo la creazione (trigger + privilegi). |
 | `templates` | servizio | Template: chiave, nome. | Gestiti dal gestore del servizio. |
 | `template_versions` | servizio | Versione immutabile del template (codice/asset di riferimento). | |
-| `songs` | condiviso o tenant | Titolo, incipit, autori, fonte, temi, momenti, riferimenti biblici, `rights_status`, `lyrics` (testo completo). | `organization_id` **null** = catalogo condiviso. Testi completi ammessi ([OQ-05](../product/open-questions.md#oq-05)); curatela: [OQ-16](../product/open-questions.md#oq-16). |
+| `songs` | condiviso o tenant | Titolo, incipit, autori, fonte, temi, momenti, riferimenti biblici, `rights_status`, `lyrics` (testo completo). | `organization_id` **null** = catalogo condiviso. Testi completi ammessi ([OQ-05](../product/open-questions.md#oq-05)); catalogo condiviso scritto solo dal `service_admin` ([OQ-16](../product/open-questions.md#oq-16)). |
 | `song_repertoires` | condiviso o tenant | Repertorio con nome e visibilità. | |
 | `song_repertoire_items` | come il repertorio | Appartenenza canto ↔ repertorio, ordine. | Un repertorio tenant può includere canti condivisi; mai il contrario. |
 | `edition_song_selections` | tenant | Canto scelto per momento liturgico (di edizione o celebrazione), ordine, eventuale estratto. | |
@@ -57,7 +57,9 @@ draft ──submit──▶ in_review ──approve/publish──▶ published �
 Le transizioni ammesse si definiscono in F-005. La pubblicazione è consentita in base alla
 `publishing_policy` dell'organizzazione ([OQ-02](../product/open-questions.md#oq-02)): con `restricted` solo
 ai ruoli abilitati, con `open` a tutti i membri che modificano. La verifica avviene nella funzione di
-pubblicazione lato database/server. L'obbligatorietà di `in_review` è in [OQ-13](../product/open-questions.md#oq-13).
+pubblicazione lato database/server. Lo stato `in_review` è facoltativo: chi ha il permesso può
+pubblicare direttamente dalla bozza ([OQ-13](../product/open-questions.md#oq-13)). Le pubblicazioni
+sono visibili a tutti e l'archivio è pubblico ([OQ-06](../product/open-questions.md#oq-06), "per ora").
 Una edizione `published` resta modificabile solo creando una nuova pubblicazione che **sostituisce**
 (`superseded_by`) la precedente, senza alterarla.
 
