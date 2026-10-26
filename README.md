@@ -3,10 +3,10 @@
 > La liturgia, insieme.
 
 **Communio** è un'applicazione SaaS multi-tenant per preparare, redigere, impaginare e pubblicare
-bollettini parrocchiali e agende liturgiche settimanali. Il repository si chiama `voxuna`.
+bollettini parrocchiali e agende liturgiche settimanali. Il repository è `matteopelucco/communio` (in origine `voxuna`).
 
-> **Stato:** bootstrap progettuale. Le specifiche MVP sono in attesa di approvazione del product
-> owner; non esiste ancora codice applicativo.
+> **Stato:** bootstrap progettuale completato e scope MVP approvato. Non esiste ancora codice
+> applicativo: il primo passo tecnico è l'issue #2.
 
 ## Orientamento
 

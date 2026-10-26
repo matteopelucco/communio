@@ -2,7 +2,7 @@
 
 - **Stato:** In Review
 - **Ultimo aggiornamento:** 2026-10-25
-- **Repository:** `matteopelucco/voxuna` (pubblico) · branch predefinito `main`
+- **Repository:** `matteopelucco/communio` (pubblico; rinominato da `voxuna` il 2026-10-26) · branch predefinito `main`
 
 ## Principi
 
@@ -79,7 +79,7 @@ Le label predefinite di GitHub (`bug`, `documentation`, …) restano disponibili
 
 ## Board (GitHub Projects v2)
 
-- Project utente **"Communio"** (owner `matteopelucco`), collegato al repository `voxuna`.
+- Project utente **"Communio"** (owner `matteopelucco`), collegato al repository `communio`.
 - Campo `Status` con le opzioni: `Inbox`, `Refinement`, `Ready`, `In Progress`, `In Review`, `Blocked`, `Done`.
 - Ogni issue ha milestone e stato. Le issue chiuse tramite PR mergiata passano a `Done` (workflow
   integrato del Project "Item closed → Done", da verificare nelle impostazioni del Project).
@@ -129,7 +129,7 @@ Eseguito il 2026-10-25 e **verificato** rileggendo lo stato via `gh`:
 | Labels `type:*`, `area:*`, `priority:*`, `needs:po-decision`, `security:finding` (25) | Create |
 | Milestone M0–M6 (numeri 1–7) | Create |
 | Issue #1–#17 con milestone e labels | Create |
-| Project utente **"Communio"** n. 3 — <https://github.com/users/matteopelucco/projects/3> | Creato e collegato a `matteopelucco/voxuna` |
+| Project utente **"Communio"** n. 3 — <https://github.com/users/matteopelucco/projects/3> | Creato e collegato al repository (allora `matteopelucco/voxuna`, oggi `matteopelucco/communio`) |
 | Campo `Status`: opzioni sostituite con i 7 stati del workflow | Fatto |
 | Issue aggiunte alla board: #1 `In Progress`, #2–#17 `Refinement` | Fatto |
 | Branch protection, secret scanning, Dependabot, private vulnerability reporting | **Non eseguiti** (richiedono approvazione: vedi [Azioni manuali](#azioni-manuali-del-proprietario)) |

@@ -33,7 +33,10 @@ web**, **PDF stampabile** e **archivio** consultabile.
 | Fedele / lettore anonimo     | Consultare l'agenda e il bollettino da smartphone o stampato.                      |
 | Gestore del servizio         | Gestire tenant, template e catalogo condiviso dei canti; garantire sicurezza.      |
 
-I ruoli applicativi definitivi sono oggetto di [OQ-02](open-questions.md#oq-02).
+Un'organizzazione corrisponde a un'unità pastorale ([OQ-01](open-questions.md#oq-01)). Il titolare
+sceglie se pubblicano solo i ruoli abilitati o tutti i redattori ([OQ-02](open-questions.md#oq-02)).
+Non esiste registrazione libera: si accede con username e password dopo una richiesta di accesso
+approvata ([OQ-03](open-questions.md#oq-03)).
 
 ## Principi di prodotto
 
@@ -41,7 +44,9 @@ I ruoli applicativi definitivi sono oggetto di [OQ-02](open-questions.md#oq-02).
 2. **Affidabilità visibile.** Stato di salvataggio sempre esplicito; nessun "salvato" non confermato.
 3. **Una persona alla volta in modifica**, con chiarezza su chi sta modificando (lock per edizione).
 4. **Pubblicato significa immutabile.** Le correzioni producono una nuova versione, non riscrivono la storia.
-5. **Rispetto di persone e diritti.** Minimizzazione dei dati personali; testi dei canti solo con diritti chiari.
+5. **Rispetto di persone e diritti.** Minimizzazione dei dati degli utenti dell'applicazione; i
+   contenuti pubblicati (intenzioni, recapiti, testi dei canti) sono scelta e responsabilità dell'ente;
+   fonte e diritti dei canti si registrano quando rilevante.
 6. **Locale e indipendente.** Funziona senza provider AI; l'AI, quando arriverà, propone e non decide.
 7. **Italiano, accessibile, mobile-friendly** per la consultazione.
 

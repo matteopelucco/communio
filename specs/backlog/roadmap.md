@@ -1,6 +1,6 @@
 # Roadmap MVP
 
-- **Stato:** In Review — proposta da approvare con le specifiche MVP
+- **Stato:** Approved (PR #18, 2026-10-25); le colonne delle decisioni riflettono le decisioni del 2026-10-25 e 2026-10-26
 - **Ultimo aggiornamento:** 2026-10-25
 
 Lo stato aggiornato delle issue è sulla board GitHub (Project "Communio"); questo documento descrive
@@ -38,8 +38,8 @@ di una feature parte solo con M1 completata e spec `Approved`.
 
 | Issue | Spec | Contenuto | Decisioni PO necessarie |
 | --- | --- | --- | --- |
-| #6 | F-001 Tenancy | Organizzazioni, parrocchie, luoghi di culto, slug, timezone, rito, gestione da admin | OQ-01, OQ-08 |
-| #7 | F-002 Auth, ruoli e inviti | Login/logout, sessione, ruoli, inviti monouso, gestione membri | OQ-02, OQ-03 |
+| #6 | F-001 Tenancy | Organizzazioni (= unità pastorale), parrocchie, luoghi di culto, slug, timezone, rito, gestione da admin | OQ-01 ✔, OQ-08 |
+| #7 | F-002 Auth, ruoli e accesso | Login con email e password, sessione, ruoli, politica di pubblicazione, form di richiesta di accesso approvata dal gestore del servizio, inviti/attivazione monouso, gestione membri | OQ-02 ✔, OQ-03 ✔, OQ-14 ✔, OQ-15 ✔ |
 | #8 | F-003 Email provider | `EmailProvider` local/resend, allowlist, idempotenza | — |
 | #9 | F-004 Audit | Eventi essenziali, schema, retention proposta | OQ-09 (parziale) |
 
@@ -47,8 +47,8 @@ di una feature parte solo con M1 completata e spec `Approved`.
 
 | Issue | Spec | Contenuto | Decisioni PO necessarie |
 | --- | --- | --- | --- |
-| #10 | F-005 Edizioni e dashboard | Creazione, numerazione, intervallo, stati e transizioni, dashboard | OQ-02, OQ-07 |
-| #11 | F-006 Editor modulare e sezioni | Tipi di sezione (lettura, canti, agenda, avvisi, articolo, contatti), validazione, riordino, agenda e celebrazioni | OQ-04, OQ-08 |
+| #10 | F-005 Edizioni e dashboard | Creazione, numerazione, intervallo, stati e transizioni secondo la politica di pubblicazione, dashboard | OQ-02 ✔, OQ-13 ✔, OQ-07 |
+| #11 | F-006 Editor modulare e sezioni | Tipi di sezione (lettura, canti, agenda, avvisi, articolo, contatti), validazione, riordino, agenda e celebrazioni | OQ-04 ✔, OQ-08 |
 | #12 | F-007 Lock e autosalvataggio | Lock per sessione, heartbeat, sola lettura, autosave, versioni, realtime | — |
 | #13 | F-008 Duplicazione | Copia di un'edizione storica come nuova bozza, ricalcolo date, cosa si copia | — |
 
@@ -58,13 +58,13 @@ di una feature parte solo con M1 completata e spec `Approved`.
 | --- | --- | --- |
 | #14 | Spike: PDF con Chromium su Vercel | PoC misurato (dimensione bundle, memoria, tempo, cold start) e raccomandazione A/B/C (ADR-0006). **Consigliato presto** dopo #2 perché può cambiare l'architettura |
 | #15 | F-009 Template v1 e anteprima | Template ispirato al campione con miglioramenti di leggibilità; anteprima in editing |
-| #16 | F-010 Pubblicazione e archivio | Snapshot immutabile, HTML pubblico, PDF, archivio, ripubblicazione (OQ-04, OQ-06) |
+| #16 | F-010 Pubblicazione e archivio | Snapshot immutabile, HTML pubblico, PDF, archivio, ripubblicazione (OQ-04 ✔, OQ-06 ✔) |
 
 ## M5 — Canti e repertori
 
 | Issue | Spec | Contenuto |
 | --- | --- | --- |
-| #17 | F-011 Catalogo canti e repertori | Catalogo condiviso/locale, diritti, repertori, selezione per momento liturgico (OQ-05) |
+| #17 | F-011 Catalogo canti e repertori | Catalogo condiviso/locale con testi completi, fonte e diritti, repertori, selezione per momento liturgico (OQ-05 ✔, OQ-16 ✔) |
 
 ## M6 — Hardening e rilascio MVP
 

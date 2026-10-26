@@ -25,7 +25,7 @@ dati fittizi.
 | # | Sezione nel campione | Tipo proposto (`section_type`) | Contenuto strutturato |
 | --- | --- | --- | --- |
 | 1 | Testata | (attributi di edizione e organizzazione, non una sezione) | Anno, numero, intervallo date, nome unità pastorale, elenco parrocchie. |
-| 2 | Contatti (parroco, segreteria, link community) | `contacts` o impostazioni organizzazione | Ruolo, nome, recapiti, link. **Dati personali**: pubblicare solo recapiti istituzionali o con consenso. |
+| 2 | Contatti (parroco, segreteria, link community) | `contacts` o impostazioni organizzazione | Ruolo, nome, recapiti, link. Pubblicati come nel cartaceo, sotto la responsabilità dell'ente ([OQ-04](open-questions.md#oq-04)). |
 | 3 | Titolo della festa + Vangelo | `reading` | Titolo del giorno liturgico, riferimento biblico, testo, fonte/traduzione. |
 | 4 | "Cantiamo insieme" | `songs` | Righe *momento liturgico → canto*; per ogni canto: titolo/incipit, ritornello, strofe; evidenziazione del ritornello (grassetto). |
 | 5 | Agenda | `agenda` | Giorni dell'intervallo; per giorno: data, ricorrenza/santi, colore liturgico, elenco eventi o "nulla da segnalare". |
@@ -63,8 +63,8 @@ dati fittizi.
   parrocchie.
 - L'edizione appartiene all'organizzazione e copre **più parrocchie**.
 - Le celebrazioni sono dati strutturati riusabili (duplicazione, celebrazioni ricorrenti future).
-- Le intenzioni sono **dati personali** destinati alla pubblicazione: richiedono una decisione di
-  policy ([OQ-04](open-questions.md#oq-04)).
+- Le intenzioni si pubblicano in HTML e PDF come nel cartaceo; la scelta e la responsabilità sono
+  dell'ente ([OQ-04](open-questions.md#oq-04), decisa).
 - I momenti liturgici dipendono dal **rito** (ambrosiano: "Dopo il Vangelo", "Allo spezzare del pane").
 
 ## Esempio fittizio (struttura)
