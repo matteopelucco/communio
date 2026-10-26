@@ -172,7 +172,7 @@ dell'ente tramite Communio e non cambia questa regola sul repository.
 
 ## OQ-12
 
-**Decisa (2026-10-25).** Il prodotto si chiama **Communio**; `voxuna` è il nome del repository.
+**Decisa (2026-10-25).** Il prodotto si chiama **Communio**. Il repository, inizialmente `voxuna`, è stato rinominato `matteopelucco/communio` dal proprietario (rilevato il 2026-10-26); GitHub reindirizza il vecchio URL.
 
 ## OQ-13
 
